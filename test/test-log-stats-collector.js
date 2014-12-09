@@ -38,7 +38,7 @@ exports.testRecordRequestAndGetStatsForSingleRoute = function(test) {
             'dyno.1': 3,
             'dyno.2': 1
         },
-        mostPopularDyno: 'dyno.1',
+        topDyno: 'dyno.1',
         responseTimes: {
             mean: 20,
             mode: 20,
