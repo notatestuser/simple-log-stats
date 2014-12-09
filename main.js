@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /* global process:true */
 /* global console:true */
 /* global require:true */
