@@ -4,9 +4,7 @@
 /* global console:true */
 /* global require:true */
 
-//
 // @author Luke Plaster <me@lukep.org>
-//
 
 'use strict';
 
@@ -27,7 +25,7 @@ var whitelist = require('./' + (process.argv[3] || 'routes.json'));
 // -- ----- --
 
 // this will keep track of our stats
-var statsCollector = new LogStatsCollector();
+var statsCollector = new LogStatsCollector(whitelist);
 
 // this is a writable stream that takes log lines as input
 var lineParserStream = new LogLineParserStream(statsCollector);
@@ -45,15 +43,13 @@ table.setHeading('Request', 'Hits', 'TopDyno', 'Mean', 'Median', 'Mode');
 // when done let's build our table and print it to the console
 readStream.on('end', function() {
     var displayRoutes = statsCollector.getKnownRoutes();
+    // the whitelist might contain routes that had 0 hits (no stats). add 'em
     whitelist.forEach(function(route) {
         if (displayRoutes.indexOf(route) === -1) {
             displayRoutes.push(route);
         }
     });
     displayRoutes.forEach(function(route) {
-        if (whitelist.indexOf(route) === -1) {
-            return;
-        }
         var routeStats = statsCollector.getStatsForRoute(route);
         var responseTimes = routeStats.responseTimes || {};
         table.addRow(
@@ -67,4 +63,3 @@ readStream.on('end', function() {
     });
     console.log(table.toString());
 });
-
