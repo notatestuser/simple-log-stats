@@ -12,8 +12,7 @@ var fs = require('fs');
 var byline = require('byline');
 var AsciiTable = require('ascii-table');
 
-// -- ----- --
-
+// our libs!
 var LogStatsCollector = require('./lib/log-stats-collector');
 var LogLineParserStream = require('./lib/log-line-parser');
 
@@ -27,13 +26,10 @@ var whitelist = require('./' + (process.argv[3] || 'routes.json'));
 // this will keep track of our stats
 var statsCollector = new LogStatsCollector(whitelist);
 
-// this is a writable stream that takes log lines as input
-var lineParserStream = new LogLineParserStream(statsCollector);
-
-// set up our streams (readStream = file input, lineStream = file content split by lines)
+// set up our streams (readStream = file input stream, lineParserStream = our parser)
 var readStream = fs.createReadStream(fileName, { encoding: 'utf8' });
-var lineStream = byline.createStream(readStream);
-lineStream.pipe(lineParserStream);
+var lineParserStream = new LogLineParserStream(statsCollector);
+byline(readStream).pipe(lineParserStream);
 
 // -- ----- --
 
