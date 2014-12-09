@@ -1,7 +1,7 @@
-simple-log-parser
------------------
+simple-log-stats
+----------------
 
-A lightweight streaming log parser for heroku router logs.
+A :cool: log parser for heroku router logs.
 
 ## Usage
 
@@ -9,8 +9,10 @@ Have your log file at the ready and point the program at it:
 
 ```bash
 $ npm install
-$ ./main.js ~/sample.log
+$ time ./main.js ~/sample.log
 ```
+
+The `routes.json` file contains the set of routes you care about (the whitelist).
 
 ## Running the tests
 

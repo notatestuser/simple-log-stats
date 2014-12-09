@@ -1,6 +1,7 @@
 {
     "name": "simple-log-stats",
     "author": "Luke Plaster <me@lukep.org>",
+    "version": "0.0.1",
     "private": "true",
     "scripts": {
         "test": "./node_modules/nodeunit/bin/nodeunit test/"
