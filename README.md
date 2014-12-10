@@ -17,5 +17,5 @@ The `routes.json` file contains the set of routes you care about (the whitelist)
 ## Running the tests
 
 ```bash
-$ npm install --dev && npm test
+$ npm test
 ```
